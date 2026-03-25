@@ -450,7 +450,7 @@ function closeModal(){document.getElementById('productModal').classList.remove('
 function placeOrder(pid){
   const p=products.find(x=>x.id==pid);if(!p)return;
   const o={id:genId(),productId:pid,productName:p.name,price:p.price,clientName:currentClient?currentClient.name:'Visiteur',clientId:currentClient?currentClient.id:null,date:new Date().toLocaleDateString('fr-FR'),status:'new'};
-  orders.unshift(o);
+  if(window.fbSave){window.fbSave('orders',o);}else{orders.unshift(o);save();}
   if(currentClient){const idx=clients.findIndex(c=>c.id===currentClient.id);if(idx>-1){clients[idx].orders=clients[idx].orders||[];clients[idx].orders.unshift(o.id);}}
   save();
 }
@@ -526,7 +526,7 @@ function registerClient(){
   if(!n||!e||!p){showAuthError('Remplis tous les champs');return;}
   if(clients.find(c=>c.email===e)){showAuthError('Email déjà utilisé');return;}
   const c={id:genId(),name:n,email:e,password:p,orders:[],date:new Date().toLocaleDateString('fr-FR')};
-  clients.push(c);currentClient=c;setData('lms_current_client',c);save();closeCompte();toast('Compte créé ! Bienvenue '+n+' 🎮');renderProducts();
+  if(window.fbSave){window.fbSave('clients',c);}else{clients.push(c);save();}currentClient=c;setData('lms_current_client',c);closeCompte();toast('Compte créé ! Bienvenue '+n+' 🎮');renderProducts();
 }
 
 function showAuthError(m){const e=document.getElementById('auth-error');e.textContent=m;e.style.display='block';}
@@ -593,8 +593,8 @@ function removePhoto(zoneId, previewId, removeId, iconId, textId, inputId){
 function addProduct(){
   const n=document.getElementById('p-name').value.trim(),d=document.getElementById('p-desc').value.trim(),pr=Number(document.getElementById('p-price').value),c=document.getElementById('p-cat').value,b=document.getElementById('p-badge').value;
   if(!n||!pr){toast('❌ Remplis le nom et le prix');return;}
-  products.unshift({id:genId(),name:n,desc:d,price:pr,cat:c,badge:b,photo:pendingPhotoBase64||null});
-  save();
+  const newP={name:n,desc:d,price:pr,cat:c,badge:b,photo:pendingPhotoBase64||null};
+  if(window.fbSave){window.fbSave('products',newP);}else{newP.id=genId();products.unshift(newP);save();}
   document.getElementById('p-name').value='';document.getElementById('p-desc').value='';document.getElementById('p-price').value='';document.getElementById('p-badge').value='';
   removePhoto('upload-zone','upload-preview','upload-remove','upload-icon','upload-text','p-photo');
   renderVendorProducts();renderProducts();updateStats();toast('✅ Produit ajouté !');
@@ -620,7 +620,7 @@ function renderVendorProducts(){
 
 function deleteProduct(id){
   if(!confirm('Supprimer ce produit ?'))return;
-  products=products.filter(p=>p.id!=id);save();renderVendorProducts();renderProducts();updateStats();toast('🗑️ Supprimé');
+  if(window.fbDelete){window.fbDelete('products',id);}else{products=products.filter(p=>p.id!=id);save();}renderVendorProducts();renderProducts();updateStats();toast('🗑️ Supprimé');
 }
 
 function openEdit(id){
@@ -648,7 +648,7 @@ function saveEdit(){
   products[i].cat=document.getElementById('edit-cat').value;
   products[i].badge=document.getElementById('edit-badge').value;
   products[i].photo=editPhotoBase64;
-  save();closeEdit();renderVendorProducts();renderProducts();toast('✅ Modifié !');
+  if(window.fbSave){window.fbSave('products',products[i]);}else{save();}closeEdit();renderVendorProducts();renderProducts();toast('✅ Modifié !');
 }
 function closeEdit(){document.getElementById('editModal').classList.remove('open');}
 
@@ -691,6 +691,68 @@ window.addEventListener('load',()=>{
   renderProducts();
   if(currentClient){const f=clients.find(c=>c.id===currentClient.id);if(f){currentClient=f;setData('lms_current_client',f);}}
 });
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB0HiofdxI0J6y51osHC1vwbSrfR-fIR-k",
+    authDomain: "lm-shop-ba273.firebaseapp.com",
+    projectId: "lm-shop-ba273",
+    storageBucket: "lm-shop-ba273.firebasestorage.app",
+    messagingSenderId: "263177573696",
+    appId: "1:263177573696:web:85c3948930a580575b56a5"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  window.db = db;
+  window.fsCollection = collection;
+  window.fsDocs = getDocs;
+  window.fsAddDoc = addDoc;
+  window.fsOnSnapshot = onSnapshot;
+  window.fsDoc = doc;
+  window.fsUpdateDoc = updateDoc;
+  window.fsDeleteDoc = deleteDoc;
+  window.fsApp = app;
+
+  // Sync produits en temps reel
+  onSnapshot(collection(db, "products"), (snap) => {
+    products = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    renderProducts();
+    renderVendorProducts && renderVendorProducts();
+    updateStats && updateStats();
+  });
+
+  // Sync commandes en temps reel
+  onSnapshot(collection(db, "orders"), (snap) => {
+    orders = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    renderVendorOrders && renderVendorOrders();
+    updateStats && updateStats();
+  });
+
+  // Sync clients en temps reel
+  onSnapshot(collection(db, "clients"), (snap) => {
+    clients = snap.docs.map(d => ({id: d.id, ...d.data()}));
+  });
+
+  window.fbSave = async function(col, data) {
+    const {id, ...rest} = data;
+    if(id && typeof id === "string" && id.length > 10) {
+      await updateDoc(doc(db, col, id), rest);
+    } else {
+      await addDoc(collection(db, col), rest);
+    }
+  };
+
+  window.fbDelete = async function(col, id) {
+    await deleteDoc(doc(db, col, id));
+  };
+
+  console.log("Firebase connecte !");
 </script>
 </body>
 </html>
