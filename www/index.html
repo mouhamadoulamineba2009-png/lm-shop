@@ -693,9 +693,13 @@ window.addEventListener('load',()=>{
 });
 </script>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-  import { getFirestore, collection, getDocs, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+<script>
+(async () => {
+  // Firebase charge via CDN
+  const _app = await import("https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js");
+  const _fs = await import("https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js");
+  const { initializeApp } = _app;
+  const { getFirestore, collection, getDocs, addDoc, onSnapshot, doc, updateDoc, deleteDoc } = _fs;
 
   const firebaseConfig = {
     apiKey: "AIzaSyB0HiofdxI0J6y51osHC1vwbSrfR-fIR-k",
@@ -753,6 +757,7 @@ window.addEventListener('load',()=>{
   };
 
   console.log("Firebase connecte !");
+})();
 </script>
 </body>
 </html>
