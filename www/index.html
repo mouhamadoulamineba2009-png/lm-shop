@@ -655,9 +655,10 @@ function placeOrder(pid){
 }
 
 function showClientView(v,b){
-  document.getElementById('c-boutique-view').style.display=v==='boutique'?'block':'none';
-  document.getElementById('c-compte-view').style.display=v==='compte'?'block':'none';
-  const pv=document.getElementById('c-params-view');if(pv)pv.style.display=v==='params'?'block':'none';
+  ['boutique','compte','params'].forEach(x=>{
+    const el=document.getElementById('c-'+x+'-view');
+    if(el)el.style.display=v===x?'block':'none';
+  });
   const pv=document.getElementById('c-params-view');if(pv)pv.style.display=v==='params'?'block':'none';
   document.querySelectorAll('.c-nav-item').forEach(x=>x.classList.remove('active'));
   if(b)b.classList.add('active');
