@@ -373,7 +373,7 @@ html,body { height:100%; font-family:'Rajdhani',sans-serif; background:var(--dar
       </div>
     </div>
   </div>
-  <div id="c-params-view" style="display:none"><div class="c-params-page"><p class="params-title">// PARAMETRES</p><div class="params-card"><div class="params-card-title">Version de lapplication</div><div class="params-version" id="current-version">Version actuelle : 1.0.0</div><div class="params-version" id="latest-version" style="color:var(--gold);margin-top:4px"></div></div><div class="params-card" id="update-card" style="display:none"><div class="params-card-title">Mise a jour disponible !</div><div class="params-card-desc" id="update-notes">Une nouvelle version est disponible.</div><button class="params-update-btn" id="update-btn">Telecharger la mise a jour</button></div><div class="params-card"><div class="params-card-title">A propos</div><div class="params-card-desc">LM Shop - Ta boutique gaming. Developpe au Senegal</div></div></div></div>
+  
   <nav class="c-bottom-nav">
     <button class="c-nav-item active" onclick="showClientView('boutique',this)">
       <span class="c-nav-icon">🏪</span>Boutique
@@ -659,7 +659,7 @@ function showClientView(v,b){
     const el=document.getElementById('c-'+x+'-view');
     if(el)el.style.display=v===x?'block':'none';
   });
-  const pv=document.getElementById('c-params-view');if(pv)pv.style.display=v==='params'?'block':'none';
+
   document.querySelectorAll('.c-nav-item').forEach(x=>x.classList.remove('active'));
   if(b)b.classList.add('active');
   if(v==='compte')renderClientCompte();
