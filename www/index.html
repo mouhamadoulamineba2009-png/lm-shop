@@ -185,11 +185,131 @@ html,body { height:100%; font-family:'Rajdhani',sans-serif; background:var(--dar
 .v-empty-text { font-size:0.88rem; }
 .toast { position:fixed; bottom:90px; left:50%; transform:translateX(-50%); background:var(--dark3); border:1px solid rgba(212,175,55,0.4); color:var(--gold); padding:11px 22px; border-radius:30px; font-size:0.82rem; font-weight:700; z-index:900; opacity:0; transition:opacity 0.3s; pointer-events:none; white-space:nowrap; }
 .toast.show { opacity:1; }
+
+/* ── UPDATE BANNER ── */
+.update-banner { display:none; position:fixed; top:0; left:0; right:0; z-index:999; background:linear-gradient(135deg,#d4af37,#b8940a); padding:12px 16px; text-align:center; }
+.update-banner.show { display:block; }
+.update-banner-text { font-family:'Orbitron',sans-serif; font-size:0.75rem; color:#07070f; font-weight:900; }
+.update-banner-btn { display:inline-block; margin-top:6px; padding:7px 18px; border-radius:20px; background:#07070f; color:var(--gold); font-weight:800; font-size:0.78rem; cursor:pointer; border:none; font-family:'Rajdhani',sans-serif; }
+
+/* ── CHAT ── */
+.chat-overlay { display:none; position:fixed; inset:0; z-index:500; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); align-items:flex-end; justify-content:center; }
+.chat-overlay.open { display:flex; }
+.chat-box { background:var(--dark2); border-radius:24px 24px 0 0; width:100%; max-width:600px; height:75vh; display:flex; flex-direction:column; border-top:2px solid rgba(0,229,255,0.4); animation:slideUp 0.3s ease; }
+.chat-header { padding:16px 18px; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; }
+.chat-title { font-family:'Orbitron',sans-serif; font-size:0.85rem; color:var(--neon); font-weight:700; }
+.chat-messages { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
+.chat-msg { max-width:78%; padding:10px 13px; border-radius:14px; font-size:0.88rem; line-height:1.5; }
+.chat-msg.mine { align-self:flex-end; background:rgba(0,229,255,0.15); border:1px solid rgba(0,229,255,0.25); color:var(--text); border-radius:14px 14px 4px 14px; }
+.chat-msg.theirs { align-self:flex-start; background:var(--dark3); border:1px solid rgba(255,255,255,0.06); color:var(--text); border-radius:14px 14px 14px 4px; }
+.chat-msg.vendor { background:rgba(212,175,55,0.15); border:1px solid rgba(212,175,55,0.25); }
+.chat-msg-name { font-size:0.68rem; color:var(--muted); margin-bottom:3px; font-weight:700; }
+.chat-msg-time { font-size:0.62rem; color:var(--muted); margin-top:3px; text-align:right; }
+.chat-input-row { padding:12px 14px; border-top:1px solid rgba(255,255,255,0.06); display:flex; gap:8px; }
+.chat-input { flex:1; padding:11px 14px; border-radius:22px; background:var(--dark3); border:1px solid rgba(255,255,255,0.1); color:var(--text); font-size:0.9rem; font-family:'Rajdhani',sans-serif; outline:none; }
+.chat-input:focus { border-color:var(--neon); }
+.chat-send { padding:11px 16px; border-radius:22px; border:none; background:var(--neon); color:#07070f; font-weight:800; cursor:pointer; font-size:0.88rem; }
+.chat-badge { position:absolute; top:-4px; right:-4px; background:var(--red); color:white; font-size:0.55rem; font-weight:900; width:16px; height:16px; border-radius:50%; display:none; align-items:center; justify-content:center; }
+.chat-badge.show { display:flex; }
+.chat-nav-wrap { position:relative; display:inline-block; }
+
+/* ── AVIS ── */
+.avis-section { margin-top:16px; border-top:1px solid rgba(255,255,255,0.06); padding-top:14px; }
+.avis-title { font-family:'Orbitron',sans-serif; font-size:0.72rem; color:var(--muted); letter-spacing:0.12em; margin-bottom:10px; }
+.stars-input { display:flex; gap:6px; margin-bottom:10px; }
+.star-btn { font-size:1.4rem; background:none; border:none; cursor:pointer; opacity:0.4; transition:opacity 0.2s; }
+.star-btn.active { opacity:1; }
+.avis-input { width:100%; padding:10px 13px; border-radius:10px; background:var(--dark3); border:1px solid rgba(255,255,255,0.08); color:var(--text); font-size:0.88rem; font-family:'Rajdhani',sans-serif; outline:none; margin-bottom:10px; resize:none; height:70px; }
+.avis-input:focus { border-color:var(--gold); }
+.avis-submit { padding:9px 20px; border-radius:10px; border:none; background:var(--gold); color:#07070f; font-weight:800; font-family:'Rajdhani',sans-serif; cursor:pointer; font-size:0.85rem; }
+.avis-item { background:var(--dark3); border-radius:10px; padding:11px; margin-bottom:8px; border:1px solid rgba(255,255,255,0.05); }
+.avis-item-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; }
+.avis-item-name { font-weight:700; font-size:0.82rem; color:white; }
+.avis-item-stars { color:#f0d060; font-size:0.85rem; }
+.avis-item-text { color:var(--muted); font-size:0.82rem; line-height:1.5; }
+.avis-avg { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.avis-avg-num { font-family:'Orbitron',sans-serif; font-size:1.4rem; color:var(--gold); font-weight:900; }
+.avis-avg-stars { color:#f0d060; font-size:1rem; }
+
+/* ── PARAMETRES ── */
+.c-params-page { padding:90px 4% 100px; }
+.params-title { font-family:'Orbitron',sans-serif; font-size:0.78rem; color:var(--muted); letter-spacing:0.15em; margin-bottom:16px; }
+.params-card { background:var(--dark3); border-radius:14px; padding:16px; margin-bottom:12px; border:1px solid rgba(255,255,255,0.06); }
+.params-card-title { font-family:'Orbitron',sans-serif; font-size:0.78rem; color:white; margin-bottom:6px; }
+.params-card-desc { color:var(--muted); font-size:0.82rem; margin-bottom:12px; line-height:1.5; }
+.params-version { color:var(--neon); font-size:0.75rem; margin-top:4px; }
+.params-update-btn { width:100%; padding:12px; border-radius:10px; border:none; background:linear-gradient(135deg,var(--gold),#b8940a); color:#07070f; font-weight:800; font-family:'Rajdhani',sans-serif; cursor:pointer; font-size:0.92rem; }
+.params-update-btn:disabled { opacity:0.5; cursor:not-allowed; }
+
+/* vendor chat */
+.v-chat-list { max-height:300px; overflow-y:auto; margin-bottom:12px; }
+.v-chat-client { background:var(--dark3); border-radius:10px; padding:12px; margin-bottom:8px; border:1px solid rgba(255,255,255,0.06); cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.v-chat-client:hover { border-color:var(--gold); }
+.v-chat-client-name { font-weight:700; color:white; font-size:0.88rem; }
+.v-chat-client-last { color:var(--muted); font-size:0.75rem; margin-top:2px; }
+.v-chat-unread { background:var(--red); color:white; font-size:0.62rem; font-weight:900; padding:2px 7px; border-radius:10px; }
+
+/* ── UPDATE BANNER ── */
+.update-banner { display:none; position:fixed; top:0; left:0; right:0; z-index:999; background:linear-gradient(135deg,#d4af37,#b8940a); padding:12px 16px; text-align:center; }
+.update-banner.show { display:block; }
+.update-banner-text { font-family:'Orbitron',sans-serif; font-size:0.75rem; color:#07070f; font-weight:900; }
+.update-banner-btn { display:inline-block; margin-top:6px; padding:7px 18px; border-radius:20px; background:#07070f; color:var(--gold); font-weight:800; font-size:0.78rem; cursor:pointer; border:none; font-family:'Rajdhani',sans-serif; }
+.chat-overlay { display:none; position:fixed; inset:0; z-index:500; background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); align-items:flex-end; justify-content:center; }
+.chat-overlay.open { display:flex; }
+.chat-box { background:var(--dark2); border-radius:24px 24px 0 0; width:100%; max-width:600px; height:75vh; display:flex; flex-direction:column; border-top:2px solid rgba(0,229,255,0.4); animation:slideUp 0.3s ease; }
+.chat-header { padding:16px 18px; border-bottom:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; }
+.chat-title { font-family:'Orbitron',sans-serif; font-size:0.85rem; color:var(--neon); font-weight:700; }
+.chat-messages { flex:1; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; }
+.chat-msg { max-width:78%; padding:10px 13px; border-radius:14px; font-size:0.88rem; line-height:1.5; }
+.chat-msg.mine { align-self:flex-end; background:rgba(0,229,255,0.15); border:1px solid rgba(0,229,255,0.25); color:var(--text); border-radius:14px 14px 4px 14px; }
+.chat-msg.theirs { align-self:flex-start; background:var(--dark3); border:1px solid rgba(255,255,255,0.06); color:var(--text); border-radius:14px 14px 14px 4px; }
+.chat-msg.vendor { background:rgba(212,175,55,0.15); border:1px solid rgba(212,175,55,0.25); }
+.chat-msg-name { font-size:0.68rem; color:var(--muted); margin-bottom:3px; font-weight:700; }
+.chat-msg-time { font-size:0.62rem; color:var(--muted); margin-top:3px; text-align:right; }
+.chat-input-row { padding:12px 14px; border-top:1px solid rgba(255,255,255,0.06); display:flex; gap:8px; }
+.chat-input { flex:1; padding:11px 14px; border-radius:22px; background:var(--dark3); border:1px solid rgba(255,255,255,0.1); color:var(--text); font-size:0.9rem; font-family:'Rajdhani',sans-serif; outline:none; }
+.chat-input:focus { border-color:var(--neon); }
+.chat-send { padding:11px 16px; border-radius:22px; border:none; background:var(--neon); color:#07070f; font-weight:800; cursor:pointer; font-size:0.88rem; }
+.chat-badge { position:absolute; top:-4px; right:-4px; background:var(--red); color:white; font-size:0.55rem; font-weight:900; width:16px; height:16px; border-radius:50%; display:none; align-items:center; justify-content:center; }
+.chat-badge.show { display:flex; }
+.avis-section { margin-top:16px; border-top:1px solid rgba(255,255,255,0.06); padding-top:14px; }
+.avis-title { font-family:'Orbitron',sans-serif; font-size:0.72rem; color:var(--muted); letter-spacing:0.12em; margin-bottom:10px; }
+.stars-input { display:flex; gap:6px; margin-bottom:10px; }
+.star-btn { font-size:1.4rem; background:none; border:none; cursor:pointer; opacity:0.4; transition:opacity 0.2s; }
+.star-btn.active { opacity:1; }
+.avis-input { width:100%; padding:10px 13px; border-radius:10px; background:var(--dark3); border:1px solid rgba(255,255,255,0.08); color:var(--text); font-size:0.88rem; font-family:'Rajdhani',sans-serif; outline:none; margin-bottom:10px; resize:none; height:70px; }
+.avis-input:focus { border-color:var(--gold); }
+.avis-submit { padding:9px 20px; border-radius:10px; border:none; background:var(--gold); color:#07070f; font-weight:800; font-family:'Rajdhani',sans-serif; cursor:pointer; font-size:0.85rem; }
+.avis-item { background:var(--dark3); border-radius:10px; padding:11px; margin-bottom:8px; border:1px solid rgba(255,255,255,0.05); }
+.avis-item-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:5px; }
+.avis-item-name { font-weight:700; font-size:0.82rem; color:white; }
+.avis-item-stars { color:#f0d060; font-size:0.85rem; }
+.avis-item-text { color:var(--muted); font-size:0.82rem; line-height:1.5; }
+.avis-avg { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+.avis-avg-num { font-family:'Orbitron',sans-serif; font-size:1.4rem; color:var(--gold); font-weight:900; }
+.c-params-page { padding:90px 4% 100px; }
+.params-title { font-family:'Orbitron',sans-serif; font-size:0.78rem; color:var(--muted); letter-spacing:0.15em; margin-bottom:16px; }
+.params-card { background:var(--dark3); border-radius:14px; padding:16px; margin-bottom:12px; border:1px solid rgba(255,255,255,0.06); }
+.params-card-title { font-family:'Orbitron',sans-serif; font-size:0.78rem; color:white; margin-bottom:6px; }
+.params-card-desc { color:var(--muted); font-size:0.82rem; margin-bottom:12px; line-height:1.5; }
+.params-version { color:var(--neon); font-size:0.75rem; margin-top:4px; }
+.params-update-btn { width:100%; padding:12px; border-radius:10px; border:none; background:linear-gradient(135deg,var(--gold),#b8940a); color:#07070f; font-weight:800; font-family:'Rajdhani',sans-serif; cursor:pointer; font-size:0.92rem; }
+.v-chat-client { background:var(--dark3); border-radius:10px; padding:12px; margin-bottom:8px; border:1px solid rgba(255,255,255,0.06); cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.v-chat-client:hover { border-color:var(--gold); }
+.v-chat-client-name { font-weight:700; color:white; font-size:0.88rem; }
+.v-chat-client-last { color:var(--muted); font-size:0.75rem; margin-top:2px; }
+.v-chat-unread { background:var(--red); color:white; font-size:0.62rem; font-weight:900; padding:2px 7px; border-radius:10px; }
 </style>
 </head>
 <body>
 
 <!-- ══ CLIENT PAGE ══ -->
+
+<div class="update-banner" id="updateBanner">
+  <div class="update-banner-text">🔄 Nouvelle mise à jour disponible !</div>
+  <button class="update-banner-btn" onclick="goToParams()">Télécharger maintenant</button>
+</div>
+<div class="update-banner" id="updateBanner"><div class="update-banner-text">Nouvelle mise a jour disponible !</div><button class="update-banner-btn" onclick="goToParams()">Telecharger maintenant</button></div>
 <div id="client-page" class="page active">
   <nav class="c-nav">
     <div class="c-logo">LM<span>Shop</span></div>
@@ -232,6 +352,28 @@ html,body { height:100%; font-family:'Rajdhani',sans-serif; background:var(--dar
     </div>
   </div>
 
+
+  <!-- PARAMETRES CLIENT -->
+  <div id="c-params-view" style="display:none">
+    <div class="c-params-page">
+      <p class="params-title">// PARAMÈTRES</p>
+      <div class="params-card">
+        <div class="params-card-title">📱 Version de l'application</div>
+        <div class="params-version" id="current-version">Version actuelle : 1.0.0</div>
+        <div class="params-version" id="latest-version" style="color:var(--gold);margin-top:4px"></div>
+      </div>
+      <div class="params-card" id="update-card" style="display:none">
+        <div class="params-card-title">🔄 Mise à jour disponible !</div>
+        <div class="params-card-desc" id="update-notes">Une nouvelle version est disponible.</div>
+        <button class="params-update-btn" id="update-btn" onclick="downloadUpdate()">⬇️ Télécharger la mise à jour</button>
+      </div>
+      <div class="params-card">
+        <div class="params-card-title">ℹ️ À propos</div>
+        <div class="params-card-desc">LM Shop — Ta boutique gaming 🎮<br>Développé avec ❤️ au Sénégal</div>
+      </div>
+    </div>
+  </div>
+  <div id="c-params-view" style="display:none"><div class="c-params-page"><p class="params-title">// PARAMETRES</p><div class="params-card"><div class="params-card-title">Version de lapplication</div><div class="params-version" id="current-version">Version actuelle : 1.0.0</div><div class="params-version" id="latest-version" style="color:var(--gold);margin-top:4px"></div></div><div class="params-card" id="update-card" style="display:none"><div class="params-card-title">Mise a jour disponible !</div><div class="params-card-desc" id="update-notes">Une nouvelle version est disponible.</div><button class="params-update-btn" id="update-btn">Telecharger la mise a jour</button></div><div class="params-card"><div class="params-card-title">A propos</div><div class="params-card-desc">LM Shop - Ta boutique gaming. Developpe au Senegal</div></div></div></div>
   <nav class="c-bottom-nav">
     <button class="c-nav-item active" onclick="showClientView('boutique',this)">
       <span class="c-nav-icon">🏪</span>Boutique
@@ -239,8 +381,14 @@ html,body { height:100%; font-family:'Rajdhani',sans-serif; background:var(--dar
     <button class="c-nav-item" onclick="openWA()">
       <span class="c-nav-icon">📲</span>WhatsApp
     </button>
+    <button class="c-nav-item" onclick="openChat()">
+      <span class="c-nav-wrap"><span class="c-nav-icon">💬</span><span class="chat-badge" id="chatBadge"></span></span>Chat
+    </button>
     <button class="c-nav-item" onclick="showClientView('compte',this)">
-      <span class="c-nav-icon">👤</span>Mon Compte
+      <span class="c-nav-icon">👤</span>Compte
+    </button>
+    <button class="c-nav-item" onclick="showClientView('params',this)">
+      <span class="c-nav-icon">⚙️</span>Paramètres
     </button>
   </nav>
 </div>
@@ -255,6 +403,8 @@ html,body { height:100%; font-family:'Rajdhani',sans-serif; background:var(--dar
     <button class="v-tab active" onclick="switchVTab('dashboard',this)">📊 Dashboard</button>
     <button class="v-tab" onclick="switchVTab('produits',this)">📦 Produits</button>
     <button class="v-tab" onclick="switchVTab('commandes',this)">🛒 Commandes<span class="v-tab-badge" id="orders-badge" style="display:none"></span></button>
+    <button class="v-tab" onclick="switchVTab('vchat',this)">💬 Chat</button>
+    <button class="v-tab" onclick="switchVTab('vchat',this)">💬 Chat</button>
   </div>
   <div class="v-content">
     <!-- DASHBOARD -->
@@ -314,6 +464,22 @@ html,body { height:100%; font-family:'Rajdhani',sans-serif; background:var(--dar
       </div>
       <div id="vendor-products-list"></div>
     </div>
+    <!-- VCHAT -->
+    <div class="v-tab-content" id="vtab-vchat">
+      <div class="v-form">
+        <p class="v-form-title">💬 Messages clients</p>
+        <div id="v-chat-clients-list"><p style="color:var(--muted);font-size:0.85rem">Aucun message pour l'instant.</p></div>
+      </div>
+      <div class="v-form" id="v-chat-conv" style="display:none">
+        <p class="v-form-title" id="v-chat-conv-title">Conversation</p>
+        <div class="chat-messages" id="v-chat-messages" style="height:220px;background:var(--dark4);border-radius:10px;padding:10px;margin-bottom:10px"></div>
+        <div style="display:flex;gap:8px">
+          <input class="v-input" id="v-chat-input" placeholder="Répondre..." style="margin:0" onkeydown="if(event.key==='Enter')vendorSendChat()">
+          <button class="v-btn-add" style="width:auto;padding:0 16px" onclick="vendorSendChat()">➤</button>
+        </div>
+      </div>
+    </div>
+    <div class="v-tab-content" id="vtab-vchat"><div class="v-form"><p class="v-form-title">Messages clients</p><div id="v-chat-clients-list"><p style="color:var(--muted);font-size:0.85rem">Aucun message.</p></div></div><div class="v-form" id="v-chat-conv" style="display:none"><p class="v-form-title" id="v-chat-conv-title">Conversation</p><div class="chat-messages" id="v-chat-messages" style="height:220px;background:var(--dark4);border-radius:10px;padding:10px;margin-bottom:10px"></div><div style="display:flex;gap:8px"><input class="v-input" id="v-chat-input" placeholder="Repondre..." style="margin:0" onkeydown="if(event.key==='Enter')vendorSendChat()"><button class="v-btn-add" style="width:auto;padding:0 16px" onclick="vendorSendChat()">Envoyer</button></div></div></div>
     <!-- COMMANDES -->
     <div class="v-tab-content" id="vtab-commandes">
       <div id="vendor-orders-list"></div>
@@ -329,10 +495,41 @@ html,body { height:100%; font-family:'Rajdhani',sans-serif; background:var(--dar
     <div class="modal-title" id="modal-title"></div>
     <div class="modal-price" id="modal-price"></div>
     <div class="modal-desc" id="modal-desc"></div>
-    <a class="modal-order" id="modal-order-btn" href="#" target="_blank">📲 Commander sur WhatsApp</a>
+    <a class="modal-order" id="modal-order-btn" href="#" target="_blank">📲 Commander sur WhatsApp</a><div class="avis-section"><div class="avis-title">// AVIS CLIENTS</div><div class="avis-avg" id="modal-avis-avg"></div><div id="modal-avis-list"></div><div id="modal-avis-form"><div class="stars-input" id="starsInput"><button class="star-btn" onclick="setStar(1)">⭐</button><button class="star-btn" onclick="setStar(2)">⭐</button><button class="star-btn" onclick="setStar(3)">⭐</button><button class="star-btn" onclick="setStar(4)">⭐</button><button class="star-btn" onclick="setStar(5)">⭐</button></div><textarea class="avis-input" id="avisText" placeholder="Ton avis..."></textarea><button class="avis-submit" onclick="submitAvis()">Publier</button></div></div>
+    <div class="avis-section">
+      <div class="avis-title">// AVIS CLIENTS</div>
+      <div class="avis-avg" id="modal-avis-avg"></div>
+      <div id="modal-avis-list"></div>
+      <div id="modal-avis-form">
+        <div class="stars-input" id="starsInput">
+          <button class="star-btn" onclick="setStar(1)">⭐</button>
+          <button class="star-btn" onclick="setStar(2)">⭐</button>
+          <button class="star-btn" onclick="setStar(3)">⭐</button>
+          <button class="star-btn" onclick="setStar(4)">⭐</button>
+          <button class="star-btn" onclick="setStar(5)">⭐</button>
+        </div>
+        <textarea class="avis-input" id="avisText" placeholder="Ton avis sur ce produit..."></textarea>
+        <button class="avis-submit" onclick="submitAvis()">Publier mon avis</button>
+      </div>
+    </div>
   </div>
 </div>
 
+
+<div class="chat-overlay" id="chatModal">
+  <div class="chat-box">
+    <div class="chat-header">
+      <span class="chat-title">💬 Chat avec LM Shop</span>
+      <button class="modal-close" onclick="closeChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-row">
+      <input class="chat-input" id="chatInput" placeholder="Ton message..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chat-send" onclick="sendChat()">➤</button>
+    </div>
+  </div>
+</div>
+<div class="chat-overlay" id="chatModal"><div class="chat-box"><div class="chat-header"><span class="chat-title">Chat avec LM Shop</span><button class="modal-close" onclick="closeChat()">X</button></div><div class="chat-messages" id="chatMessages"></div><div class="chat-input-row"><input class="chat-input" id="chatInput" placeholder="Ton message..." onkeydown="if(event.key==='Enter')sendChat()"><button class="chat-send" onclick="sendChat()">Envoyer</button></div></div></div>
 <div class="login-overlay" id="loginModal">
   <div class="login-box">
     <div class="login-logo">🔐 ADMIN</div>
@@ -444,6 +641,8 @@ function openProduct(id){
   const btn=document.getElementById('modal-order-btn');
   btn.href=waLink(p);btn.onclick=()=>placeOrder(p.id);
   document.getElementById('productModal').classList.add('open');
+  loadAvis(p.id);
+  loadAvis(id);
 }
 function closeModal(){document.getElementById('productModal').classList.remove('open');}
 
@@ -458,6 +657,8 @@ function placeOrder(pid){
 function showClientView(v,b){
   document.getElementById('c-boutique-view').style.display=v==='boutique'?'block':'none';
   document.getElementById('c-compte-view').style.display=v==='compte'?'block':'none';
+  const pv=document.getElementById('c-params-view');if(pv)pv.style.display=v==='params'?'block':'none';
+  const pv=document.getElementById('c-params-view');if(pv)pv.style.display=v==='params'?'block':'none';
   document.querySelectorAll('.c-nav-item').forEach(x=>x.classList.remove('active'));
   if(b)b.classList.add('active');
   if(v==='compte')renderClientCompte();
@@ -554,6 +755,8 @@ function logoutVendor(){
 }
 
 function switchVTab(t,b){
+  if(t==='vchat')loadVendorChats();
+  if(t==='vchat')loadVendorChats();
   document.querySelectorAll('.v-tab').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.v-tab-content').forEach(x=>x.classList.remove('active'));
   b.classList.add('active');
@@ -687,8 +890,281 @@ function updateStats(){
   else{badge.style.display='none';}
 }
 
+
+// ── MISE A JOUR ──
+const APP_VERSION = '1.0.0';
+
+async function checkUpdate() {
+  try {
+    const res = await fetch('https://cerulean-entremet-00aee7.netlify.app/version.json?t='+Date.now());
+    if(!res.ok) return;
+    const data = await res.json();
+    if(data.version && data.version !== APP_VERSION) {
+      document.getElementById('updateBanner').classList.add('show');
+      const uc = document.getElementById('update-card');
+      if(uc) {
+        uc.style.display='block';
+        document.getElementById('update-notes').textContent = data.notes || 'Nouvelle version disponible.';
+        document.getElementById('latest-version').textContent = 'Nouvelle version : ' + data.version;
+        const btn = document.getElementById('update-btn');
+        if(data.apk_url) { btn.onclick = ()=> window.open(data.apk_url,'_blank'); }
+      }
+    } else {
+      if(document.getElementById('latest-version')) document.getElementById('latest-version').textContent = '✅ Application à jour';
+    }
+  } catch(e) {}
+}
+
+function goToParams() {
+  document.getElementById('updateBanner').classList.remove('show');
+  showClientView('params');
+}
+
+function downloadUpdate() {
+  toast('⬇️ Téléchargement en cours...');
+}
+
+// ── CHAT ──
+let currentChatProduct = null;
+let vendorChatClient = null;
+
+function openChat() {
+  if(!currentClient) { openCompteModal(); return; }
+  document.getElementById('chatModal').classList.add('open');
+  loadChatMessages();
+}
+function closeChat() { document.getElementById('chatModal').classList.remove('open'); }
+
+function loadChatMessages() {
+  if(!window.fsOnSnapshot || !currentClient) return;
+  const db = window.db;
+  const { collection, query, orderBy, onSnapshot } = window;
+  fsOnSnapshot(fsCollection(db,'chats_'+currentClient.id),(snap)=>{
+    const msgs = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
+    const box = document.getElementById('chatMessages');
+    box.innerHTML = msgs.length===0 ? '<p style="color:var(--muted);text-align:center;padding:20px;font-size:0.85rem">Envoie un message à LM Shop 👋</p>' :
+      msgs.map(m=>`<div class="chat-msg ${m.from==='client'?'mine':'theirs vendor'}">
+        <div class="chat-msg-name">${m.from==='client'?'Toi':'🎮 LM Shop'}</div>
+        ${m.text}
+        <div class="chat-msg-time">${m.time||''}</div>
+      </div>`).join('');
+    box.scrollTop = box.scrollHeight;
+    // badge
+    const unread = msgs.filter(m=>m.from==='vendor'&&!m.read).length;
+    const badge = document.getElementById('chatBadge');
+    if(unread>0){badge.textContent=unread;badge.classList.add('show');}
+    else{badge.classList.remove('show');}
+  });
+}
+
+async function sendChat() {
+  if(!currentClient||!window.fbSave) return;
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim(); if(!text) return;
+  const msg = {text,from:'client',clientId:currentClient.id,clientName:currentClient.name,time:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),ts:Date.now(),read:false};
+  await window.fsAddDoc(window.fsCollection(window.db,'chats_'+currentClient.id), msg);
+  input.value='';
+  // notif vendeur
+  await window.fsAddDoc(window.fsCollection(window.db,'chat_notifs'),{clientId:currentClient.id,clientName:currentClient.name,lastMsg:text,ts:Date.now(),read:false});
+}
+
+// vendor chat
+function loadVendorChats() {
+  if(!window.fsOnSnapshot) return;
+  fsOnSnapshot(fsCollection(window.db,'chat_notifs'),(snap)=>{
+    const notifs = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
+    const list = document.getElementById('v-chat-clients-list');
+    if(!notifs.length){list.innerHTML='<p style="color:var(--muted);font-size:0.85rem">Aucun message pour l\'instant.</p>';return;}
+    list.innerHTML = notifs.map(n=>`<div class="v-chat-client" onclick="openVendorChat('${n.clientId}','${n.clientName}')">
+      <div><div class="v-chat-client-name">👤 ${n.clientName}</div><div class="v-chat-client-last">${n.lastMsg}</div></div>
+      ${!n.read?'<span class="v-chat-unread">NEW</span>':''}
+    </div>`).join('');
+  });
+}
+
+function openVendorChat(clientId, clientName) {
+  vendorChatClient = clientId;
+  document.getElementById('v-chat-conv').style.display='block';
+  document.getElementById('v-chat-conv-title').textContent='💬 '+clientName;
+  fsOnSnapshot(fsCollection(window.db,'chats_'+clientId),(snap)=>{
+    const msgs = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
+    const box = document.getElementById('v-chat-messages');
+    box.innerHTML = msgs.map(m=>`<div class="chat-msg ${m.from==='vendor'?'mine':'theirs'}">
+      <div class="chat-msg-name">${m.from==='vendor'?'Vous':m.clientName}</div>
+      ${m.text}
+      <div class="chat-msg-time">${m.time||''}</div>
+    </div>`).join('');
+    box.scrollTop = box.scrollHeight;
+  });
+}
+
+async function vendorSendChat() {
+  if(!vendorChatClient||!window.db) return;
+  const input = document.getElementById('v-chat-input');
+  const text = input.value.trim(); if(!text) return;
+  const msg = {text,from:'vendor',time:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),ts:Date.now(),read:false};
+  await window.fsAddDoc(window.fsCollection(window.db,'chats_'+vendorChatClient), msg);
+  input.value='';
+}
+
+// ── AVIS ──
+let currentAvisProductId = null;
+let currentStars = 0;
+
+function setStar(n) {
+  currentStars = n;
+  document.querySelectorAll('.star-btn').forEach((b,i)=>b.classList.toggle('active',i<n));
+}
+
+async function submitAvis() {
+  if(!currentClient){toast('Connecte-toi pour laisser un avis');return;}
+  if(!currentStars){toast('Choisis une note ⭐');return;}
+  const text = document.getElementById('avisText').value.trim();
+  if(!text){toast('Écris ton avis');return;}
+  const avis = {productId:currentAvisProductId,clientName:currentClient.name,stars:currentStars,text,date:new Date().toLocaleDateString('fr-FR'),ts:Date.now()};
+  await window.fsAddDoc(window.fsCollection(window.db,'avis'),avis);
+  document.getElementById('avisText').value='';
+  setStar(0);
+  toast('✅ Avis publié !');
+  loadAvis(currentAvisProductId);
+}
+
+function loadAvis(productId) {
+  if(!window.fsOnSnapshot) return;
+  currentAvisProductId = productId;
+  fsOnSnapshot(fsCollection(window.db,'avis'),(snap)=>{
+    const all = snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.productId===productId).sort((a,b)=>b.ts-a.ts);
+    const avg = all.length ? (all.reduce((s,a)=>s+a.stars,0)/all.length).toFixed(1) : null;
+    const avgEl = document.getElementById('modal-avis-avg');
+    avgEl.innerHTML = avg ? `<span class="avis-avg-num">${avg}</span><span class="avis-avg-stars">${'⭐'.repeat(Math.round(avg))}</span><span style="color:var(--muted);font-size:0.8rem">(${all.length} avis)</span>` : '<span style="color:var(--muted);font-size:0.82rem">Aucun avis pour l\'instant</span>';
+    document.getElementById('modal-avis-list').innerHTML = all.slice(0,5).map(a=>`<div class="avis-item">
+      <div class="avis-item-header"><span class="avis-item-name">${a.clientName}</span><span class="avis-item-stars">${'⭐'.repeat(a.stars)}</span></div>
+      <div class="avis-item-text">${a.text}</div>
+      <div style="color:var(--muted);font-size:0.68rem;margin-top:4px">${a.date}</div>
+    </div>`).join('');
+  });
+}
+
+
+const APP_VERSION = '1.0.0';
+
+async function checkUpdate() {
+  try {
+    const res = await fetch('https://cerulean-entremet-00aee7.netlify.app/version.json?t='+Date.now());
+    if(!res.ok) return;
+    const data = await res.json();
+    if(data.version && data.version !== APP_VERSION) {
+      document.getElementById('updateBanner').classList.add('show');
+      const uc = document.getElementById('update-card');
+      if(uc) {
+        uc.style.display='block';
+        document.getElementById('update-notes').textContent = data.notes||'Nouvelle version disponible.';
+        document.getElementById('latest-version').textContent = 'Nouvelle version : '+data.version;
+        if(data.apk_url){document.getElementById('update-btn').onclick=()=>window.open(data.apk_url,'_blank');}
+      }
+    } else {
+      const lv=document.getElementById('latest-version');
+      if(lv)lv.textContent='Application a jour';
+    }
+  } catch(e){}
+}
+
+function goToParams(){document.getElementById('updateBanner').classList.remove('show');showClientView('params');}
+
+let vendorChatClient=null;
+
+function openChat(){if(!currentClient){openCompteModal();return;}document.getElementById('chatModal').classList.add('open');loadChatMessages();}
+function closeChat(){document.getElementById('chatModal').classList.remove('open');}
+
+function loadChatMessages(){
+  if(!window.fsOnSnapshot||!currentClient)return;
+  fsOnSnapshot(fsCollection(window.db,'chats_'+currentClient.id),(snap)=>{
+    const msgs=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
+    const box=document.getElementById('chatMessages');
+    box.innerHTML=msgs.length===0?'<p style="color:var(--muted);text-align:center;padding:20px;font-size:0.85rem">Envoie un message a LM Shop</p>':msgs.map(m=>'<div class="chat-msg '+(m.from==='client'?'mine':'theirs vendor')+'"><div class="chat-msg-name">'+(m.from==='client'?'Toi':'LM Shop')+'</div>'+m.text+'<div class="chat-msg-time">'+(m.time||'')+'</div></div>').join('');
+    box.scrollTop=box.scrollHeight;
+    const unread=msgs.filter(m=>m.from==='vendor'&&!m.read).length;
+    const badge=document.getElementById('chatBadge');
+    if(unread>0){badge.textContent=unread;badge.classList.add('show');}else{badge.classList.remove('show');}
+  });
+}
+
+async function sendChat(){
+  if(!currentClient||!window.db)return;
+  const input=document.getElementById('chatInput');
+  const text=input.value.trim();if(!text)return;
+  const msg={text,from:'client',clientId:currentClient.id,clientName:currentClient.name,time:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),ts:Date.now(),read:false};
+  await window.fsAddDoc(window.fsCollection(window.db,'chats_'+currentClient.id),msg);
+  await window.fsAddDoc(window.fsCollection(window.db,'chat_notifs'),{clientId:currentClient.id,clientName:currentClient.name,lastMsg:text,ts:Date.now(),read:false});
+  input.value='';
+}
+
+function loadVendorChats(){
+  if(!window.fsOnSnapshot)return;
+  fsOnSnapshot(fsCollection(window.db,'chat_notifs'),(snap)=>{
+    const notifs=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
+    const list=document.getElementById('v-chat-clients-list');
+    if(!notifs.length){list.innerHTML='<p style="color:var(--muted);font-size:0.85rem">Aucun message.</p>';return;}
+    list.innerHTML=notifs.map(n=>'<div class="v-chat-client" onclick="openVendorChat(''+n.clientId+'',''+n.clientName+'')"><div><div class="v-chat-client-name">'+n.clientName+'</div><div class="v-chat-client-last">'+n.lastMsg+'</div></div>'+(n.read?'':'<span class="v-chat-unread">NEW</span>')+'</div>').join('');
+  });
+}
+
+function openVendorChat(clientId,clientName){
+  vendorChatClient=clientId;
+  document.getElementById('v-chat-conv').style.display='block';
+  document.getElementById('v-chat-conv-title').textContent='Chat avec '+clientName;
+  fsOnSnapshot(fsCollection(window.db,'chats_'+clientId),(snap)=>{
+    const msgs=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.ts-b.ts);
+    const box=document.getElementById('v-chat-messages');
+    box.innerHTML=msgs.map(m=>'<div class="chat-msg '+(m.from==='vendor'?'mine':'theirs')+'"><div class="chat-msg-name">'+(m.from==='vendor'?'Vous':m.clientName)+'</div>'+m.text+'<div class="chat-msg-time">'+(m.time||'')+'</div></div>').join('');
+    box.scrollTop=box.scrollHeight;
+  });
+}
+
+async function vendorSendChat(){
+  if(!vendorChatClient||!window.db)return;
+  const input=document.getElementById('v-chat-input');
+  const text=input.value.trim();if(!text)return;
+  const msg={text,from:'vendor',time:new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),ts:Date.now(),read:false};
+  await window.fsAddDoc(window.fsCollection(window.db,'chats_'+vendorChatClient),msg);
+  input.value='';
+}
+
+let currentAvisProductId=null;
+let currentStars=0;
+
+function setStar(n){
+  currentStars=n;
+  document.querySelectorAll('.star-btn').forEach((b,i)=>b.classList.toggle('active',i<n));
+}
+
+async function submitAvis(){
+  if(!currentClient){toast('Connecte-toi pour laisser un avis');return;}
+  if(!currentStars){toast('Choisis une note');return;}
+  const text=document.getElementById('avisText').value.trim();
+  if(!text){toast('Ecris ton avis');return;}
+  const avis={productId:currentAvisProductId,clientName:currentClient.name,stars:currentStars,text,date:new Date().toLocaleDateString('fr-FR'),ts:Date.now()};
+  await window.fsAddDoc(window.fsCollection(window.db,'avis'),avis);
+  document.getElementById('avisText').value='';
+  setStar(0);
+  toast('Avis publie !');
+}
+
+function loadAvis(productId){
+  if(!window.fsOnSnapshot)return;
+  currentAvisProductId=productId;
+  fsOnSnapshot(fsCollection(window.db,'avis'),(snap)=>{
+    const all=snap.docs.map(d=>({id:d.id,...d.data()})).filter(a=>a.productId===productId).sort((a,b)=>b.ts-a.ts);
+    const avg=all.length?(all.reduce((s,a)=>s+a.stars,0)/all.length).toFixed(1):null;
+    document.getElementById('modal-avis-avg').innerHTML=avg?'<span class="avis-avg-num">'+avg+'</span><span style="color:#f0d060;font-size:1rem"> '+Array(Math.round(Number(avg))).fill('⭐').join('')+'</span><span style="color:var(--muted);font-size:0.8rem"> ('+all.length+' avis)</span>':'<span style="color:var(--muted);font-size:0.82rem">Aucun avis</span>';
+    document.getElementById('modal-avis-list').innerHTML=all.slice(0,5).map(a=>'<div class="avis-item"><div class="avis-item-header"><span class="avis-item-name">'+a.clientName+'</span><span class="avis-item-stars">'+Array(a.stars).fill('⭐').join('')+'</span></div><div class="avis-item-text">'+a.text+'</div><div style="color:var(--muted);font-size:0.68rem;margin-top:4px">'+a.date+'</div></div>').join('');
+  });
+}
+
 window.addEventListener('load',()=>{
   renderProducts();
+  setTimeout(checkUpdate,2000);
+  checkUpdate();
   if(currentClient){const f=clients.find(c=>c.id===currentClient.id);if(f){currentClient=f;setData('lms_current_client',f);}}
 });
 </script>
